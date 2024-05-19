@@ -1,0 +1,17 @@
+Login:
+If(!IsBlank(LookUp('User Details', Username = Username_Input.Value && Password = Password_Input.Value)), Navigate(MatchesHome, ScreenTransition.UnCoverRight), Navigate(Failed_Login, ScreenTransition.Fade))
+
+Profile Creation:
+Patch('Profile Details', LookUp('Profile Details', Title = gblUsername.Value), {First_Name: FirstName.Value, Last_Name: LastName.Value, DoB: BirthDate.SelectedDate, 'Profile Picture': New_Pic.Image})
+;
+Navigate(Profile2, ScreenTransition.Cover)
+
+Patch('Profile Details', LookUp('Profile Details', Title = gblUsername.Value), {Connect: Connect_Info.Value})
+;
+Navigate(Profile4, ScreenTransition.Cover)
+
+--> Repeats for differing interests
+Patch('Profile Details', LookUp('Profile Details', Title = gblUsername.Value), {Interests: LookUp('Profile Details', Title = gblUsername.Value).Interests & "Music, "})
+
+--> Repeats for differing universities
+Patch('Profile Details', LookUp('Profile Details', Title = gblUsername.Value), {University: "USYD"})
